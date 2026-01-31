@@ -7,7 +7,7 @@ import {
   AbandonmentEvent,
   TimedQuestionType,
   STANDARD_TIME_BUDGETS
-} from './types';
+} from './types.js';
 
 /** Abandonment statistics */
 export interface AbandonmentStats {

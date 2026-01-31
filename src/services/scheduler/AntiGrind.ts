@@ -4,7 +4,7 @@
  * Pure logic - no database dependency
  */
 
-import { AntiGrindConfig, DEFAULT_SCHEDULER_CONFIG } from './types';
+import { AntiGrindConfig, DEFAULT_SCHEDULER_CONFIG } from './types.js';
 
 /** Practice attempt for anti-grind tracking */
 export interface PracticeAttempt {

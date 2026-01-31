@@ -6,7 +6,7 @@
 import {
   DEFAULT_SCHEDULER_CONFIG,
   PriorityFactor
-} from '../scheduler/types';
+} from '../scheduler/types.js';
 
 // Since the scheduler classes now depend on the actual database connection,
 // we test the core logic through their exported pure functions and algorithms

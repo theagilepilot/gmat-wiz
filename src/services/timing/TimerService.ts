@@ -10,8 +10,8 @@ import {
   TimeBudget,
   TimingResult,
   TimedQuestionType
-} from './types';
-import { BudgetCalculator } from './BudgetCalculator';
+} from './types.js';
+import { BudgetCalculator } from './BudgetCalculator.js';
 
 export class TimerService {
   private sessions: Map<string, TimerSession> = new Map();
@@ -151,7 +151,7 @@ export class TimerService {
 
     // Check if over time
     if (percentUsed >= 1.0) {
-      const existingOvertime = session.warnings.find(w => w.type === 'over-time');
+      const existingOvertime = session.warnings.find((w: TimerWarning) => w.type === 'over-time');
       if (!existingOvertime) {
         const warning: TimerWarning = {
           type: 'over-time',
@@ -169,7 +169,7 @@ export class TimerService {
 
     // Check if approaching limit
     if (percentUsed >= session.budget.warningThreshold) {
-      const existingApproaching = session.warnings.find(w => w.type === 'approaching-limit');
+      const existingApproaching = session.warnings.find((w: TimerWarning) => w.type === 'approaching-limit');
       if (!existingApproaching) {
         const remainingSeconds = Math.round(
           session.budget.adjustedSeconds - (session.elapsedMs / 1000)

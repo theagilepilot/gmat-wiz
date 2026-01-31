@@ -20,18 +20,24 @@ export interface DailyPlan {
 
 export interface PlannedBlock {
   id: string;
-  order: number;
+  order?: number;
   type: BlockType;
-  mode: TrainingMode;
+  mode?: TrainingMode;
   targetQuestions: number;
-  estimatedMinutes: number;
-  focus: BlockFocus;
-  atoms: string[];
-  status: BlockStatus;
+  estimatedMinutes?: number;
+  targetMinutes?: number;
+  focus?: BlockFocus;
+  atoms?: string[];
+  status?: BlockStatus;
   completedAt?: Date;
+  priority?: number;
+  focusAtoms?: string[];
+  gateId?: string;
+  reason?: string;
+  estimatedXP?: number;
 }
 
-export type BlockType = 'build' | 'review' | 'test' | 'remediation';
+export type BlockType = 'build' | 'review' | 'test' | 'remediation' | 'gate';
 export type TrainingMode = 'sprint' | 'endurance' | 'review' | 'mixed' | 'gate-attempt';
 export type BlockStatus = 'pending' | 'in-progress' | 'completed' | 'skipped';
 
@@ -134,6 +140,7 @@ export interface ReviewItem {
   repetitions: number;
   dueDate: Date;
   lastReview?: Date;
+  lastReviewed?: Date;
   quality?: number; // 0-5 scale for SM-2
 }
 
@@ -223,8 +230,10 @@ export interface SelectedQuestion {
   questionId: string;
   atomId: string;
   difficulty: number;
-  selectionReason: SelectionReason;
-  timeBudget: number;
+  selectionReason?: SelectionReason;
+  reason?: SelectionReason;
+  timeBudget?: number;
+  estimatedMinutes?: number;
 }
 
 export type SelectionReason = 
@@ -232,6 +241,8 @@ export type SelectionReason =
   | 'stretch'
   | 'weakness'
   | 'review'
+  | 'review-due'
+  | 'exploration'
   | 'gate-requirement'
   | 'random';
 

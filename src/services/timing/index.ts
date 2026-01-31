@@ -4,17 +4,17 @@
  */
 
 // Types
-export * from './types';
+export * from './types.js';
 
 // Core services
-export { TimerService } from './TimerService';
-export { BudgetCalculator } from './BudgetCalculator';
+export { TimerService } from './TimerService.js';
+export { BudgetCalculator } from './BudgetCalculator.js';
 
 // Analytics
-export { TimingAnalytics } from './TimingAnalytics';
-export { DriftDetector, type DriftAnalysis } from './DriftDetector';
+export { TimingAnalytics } from './TimingAnalytics.js';
+export { DriftDetector, type DriftAnalysis } from './DriftDetector.js';
 export { 
   AbandonmentTracker, 
   type AbandonmentStats, 
   type AbandonmentPattern 
-} from './AbandonmentTracker';
+} from './AbandonmentTracker.js';

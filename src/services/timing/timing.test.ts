@@ -9,11 +9,11 @@ import {
   LEVEL_TO_TIMING_MODE,
   TimingResult,
   TimedQuestionType
-} from '../timing/types';
-import { BudgetCalculator } from '../timing/BudgetCalculator';
-import { TimingAnalytics } from '../timing/TimingAnalytics';
-import { DriftDetector } from '../timing/DriftDetector';
-import { AbandonmentTracker } from '../timing/AbandonmentTracker';
+} from '../timing/types.js';
+import { BudgetCalculator } from '../timing/BudgetCalculator.js';
+import { TimingAnalytics } from '../timing/TimingAnalytics.js';
+import { DriftDetector } from '../timing/DriftDetector.js';
+import { AbandonmentTracker, AbandonmentPattern } from '../timing/AbandonmentTracker.js';
 
 describe('Timing Constants', () => {
   describe('Standard Time Budgets', () => {
@@ -413,7 +413,7 @@ describe('AbandonmentTracker', () => {
       tracker.recordAbandonment('q3', 'problem-solving', 30000); // ~25%
 
       const patterns = tracker.identifyPatterns();
-      const earlyPattern = patterns.find(p => p.type === 'early-abandon');
+      const earlyPattern = patterns.find((p: AbandonmentPattern) => p.type === 'early-abandon');
 
       expect(earlyPattern).toBeDefined();
     });
@@ -425,7 +425,7 @@ describe('AbandonmentTracker', () => {
       tracker.recordAbandonment('q3', 'problem-solving', 95000, 'strategic');
 
       const patterns = tracker.identifyPatterns();
-      const strategicPattern = patterns.find(p => p.type === 'strategic');
+      const strategicPattern = patterns.find((p: AbandonmentPattern) => p.type === 'strategic');
 
       expect(strategicPattern).toBeDefined();
     });
@@ -439,7 +439,7 @@ describe('AbandonmentTracker', () => {
       }
 
       const recommendations = tracker.getRecommendations();
-      expect(recommendations.some(r => r.includes('strategic'))).toBe(true);
+      expect(recommendations.some((r: string) => r.includes('strategic'))).toBe(true);
     });
   });
 });

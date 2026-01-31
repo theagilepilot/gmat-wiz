@@ -10,8 +10,11 @@ import {
   PriorityFactorType,
   PriorityWeights,
   SessionContext,
-  DEFAULT_SCHEDULER_CONFIG
-} from './types';
+  DEFAULT_SCHEDULER_CONFIG,
+  GateInfo,
+  WeaknessInfo,
+  AtomHistory
+} from './types.js';
 
 /** Atom data for priority calculation */
 export interface AtomData {
@@ -109,7 +112,7 @@ export class PriorityScorer {
   }
 
   private calculateBlockingGateFactor(atom: AtomData, context: SessionContext): PriorityFactor | null {
-    const blockingGate = context.blockingGates.find(g => g.atomId === atom.id);
+    const blockingGate = context.blockingGates.find((g: GateInfo) => g.atomId === atom.id);
     
     if (!blockingGate) return null;
 
@@ -128,12 +131,12 @@ export class PriorityScorer {
   }
 
   private calculateWeaknessFactor(atom: AtomData, context: SessionContext): PriorityFactor | null {
-    const weakness = context.weaknesses.find(w => w.atomId === atom.id);
+    const weakness = context.weaknesses.find((w: WeaknessInfo) => w.atomId === atom.id);
     
     if (!weakness) return null;
 
     // Higher priority for more severe weaknesses
-    const value = weakness.severity;
+    const value = weakness.priority;
     const contribution = this.weights.weaknessCluster * value;
 
     return {
@@ -141,7 +144,7 @@ export class PriorityScorer {
       weight: this.weights.weaknessCluster,
       value,
       contribution,
-      description: `Weakness: ${weakness.pattern} (${Math.round(weakness.severity * 100)}%)`
+      description: `Weakness: ${weakness.atomName} (${Math.round(weakness.priority * 100)}%)`
     };
   }
 
@@ -170,8 +173,8 @@ export class PriorityScorer {
 
   private calculateSectionBalanceFactor(atom: AtomData, context: SessionContext): PriorityFactor | null {
     // Check if this section is underrepresented in recent practice
-    const sectionCounts = context.recentAtoms.reduce((acc, a) => {
-      const section = a.split('-')[0] as 'quant' | 'verbal' | 'di';
+    const sectionCounts = context.recentAtoms.reduce((acc: Record<string, number>, a: AtomHistory) => {
+      const section = a.atomId.split('-')[0] as 'quant' | 'verbal' | 'di';
       acc[section] = (acc[section] || 0) + 1;
       return acc;
     }, {} as Record<string, number>);

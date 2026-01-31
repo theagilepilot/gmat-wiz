@@ -12,7 +12,7 @@ import {
   WARNING_THRESHOLDS,
   STRICT_ENFORCEMENT,
   LEVEL_TO_TIMING_MODE
-} from './types';
+} from './types.js';
 
 export class BudgetCalculator {
   /**

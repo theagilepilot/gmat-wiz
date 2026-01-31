@@ -4,12 +4,12 @@
  */
 
 // Types
-export * from './types';
+export * from './types.js';
 
 // Core scheduling
-export { DailyPlanner } from './DailyPlanner';
-export { BlockGenerator, type QuestionData } from './BlockGenerator';
-export { PriorityScorer, type AtomData } from './PriorityScorer';
+export { DailyPlanner } from './DailyPlanner.js';
+export { BlockGenerator, type QuestionData } from './BlockGenerator.js';
+export { PriorityScorer, type AtomData } from './PriorityScorer.js';
 
 // Spaced repetition
 export { 
@@ -17,7 +17,7 @@ export {
   ReviewQueue, 
   type Quality,
   type ReviewResult 
-} from './SpacedRepetition';
+} from './SpacedRepetition.js';
 
 // Anti-grind mechanics
 export { 
@@ -25,4 +25,4 @@ export {
   Cooldowns,
   type PracticeAttempt,
   type SessionTracking
-} from './AntiGrind';
+} from './AntiGrind.js';

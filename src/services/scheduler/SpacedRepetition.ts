@@ -4,7 +4,7 @@
  * Pure logic - no database dependency
  */
 
-import { ReviewItem, DEFAULT_SCHEDULER_CONFIG } from './types';
+import { ReviewItem, DEFAULT_SCHEDULER_CONFIG } from './types.js';
 
 /** Quality rating for SM-2 algorithm (0-5) */
 export type Quality = 0 | 1 | 2 | 3 | 4 | 5;

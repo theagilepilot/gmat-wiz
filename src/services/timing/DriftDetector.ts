@@ -3,7 +3,7 @@
  * Detects timing drift patterns (slowing down over time)
  */
 
-import { TimingResult, TimedQuestionType } from './types';
+import { TimingResult, TimedQuestionType } from './types.js';
 
 /** Drift analysis result */
 export interface DriftAnalysis {

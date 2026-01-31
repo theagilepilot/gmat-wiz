@@ -4,7 +4,7 @@
  * Pure logic - no database dependency
  */
 
-import { PriorityScorer, AtomData } from './PriorityScorer';
+import { PriorityScorer, AtomData } from './PriorityScorer.js';
 import {
   BlockRequest,
   GeneratedBlock,
@@ -15,8 +15,10 @@ import {
   BlockFocus,
   SessionContext,
   PriorityItem,
-  DEFAULT_SCHEDULER_CONFIG
-} from './types';
+  DEFAULT_SCHEDULER_CONFIG,
+  GateInfo,
+  WeaknessInfo
+} from './types.js';
 
 /** Question data for selection */
 export interface QuestionData {
@@ -111,7 +113,7 @@ export class BlockGenerator {
    */
   private determineFocus(request: BlockRequest, context: SessionContext): BlockFocus {
     if (request.gateId) {
-      const gate = context.blockingGates.find(g => g.gateId === request.gateId);
+      const gate = context.blockingGates.find((g: GateInfo) => g.gateId === request.gateId);
       return {
         gateId: request.gateId,
         atoms: [gate?.atomId || ''],
@@ -188,7 +190,7 @@ export class BlockGenerator {
     );
 
     // Select weakness questions
-    const weaknessAtomIds = new Set(context.weaknesses.map(w => w.atomId));
+    const weaknessAtomIds = new Set(context.weaknesses.map((w: WeaknessInfo) => w.atomId));
     const weaknessQuestions = filteredQuestions.filter(q =>
       weaknessAtomIds.has(q.atomId)
     );
@@ -240,7 +242,7 @@ export class BlockGenerator {
     }
 
     if (request.gateId) {
-      const gate = context.blockingGates.find(g => g.gateId === request.gateId);
+      const gate = context.blockingGates.find((g: GateInfo) => g.gateId === request.gateId);
       if (gate) {
         filtered = filtered.filter(q => q.atomId === gate.atomId);
       }

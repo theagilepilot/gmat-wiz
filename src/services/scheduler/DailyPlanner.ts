@@ -4,8 +4,8 @@
  * Pure logic - no database dependency
  */
 
-import { PriorityScorer, AtomData } from './PriorityScorer';
-import { BlockGenerator, QuestionData } from './BlockGenerator';
+import { PriorityScorer, AtomData } from './PriorityScorer.js';
+import { BlockGenerator, QuestionData } from './BlockGenerator.js';
 import {
   DailyPlan,
   PlannedBlock,
@@ -13,8 +13,9 @@ import {
   SessionContext,
   PriorityItem,
   DEFAULT_SCHEDULER_CONFIG,
-  BlockDistribution
-} from './types';
+  BlockDistribution,
+  WeaknessInfo
+} from './types.js';
 
 export class DailyPlanner {
   private config: typeof DEFAULT_SCHEDULER_CONFIG;
@@ -185,9 +186,9 @@ export class DailyPlanner {
   ): PlannedBlock {
     // Get top weakness atoms
     const weaknessAtoms = context.weaknesses
-      .sort((a, b) => b.severity - a.severity)
+      .sort((a: WeaknessInfo, b: WeaknessInfo) => b.priority - a.priority)
       .slice(0, 3)
-      .map(w => w.atomId);
+      .map((w: WeaknessInfo) => w.atomId);
 
     return {
       id: this.generateBlockId(),

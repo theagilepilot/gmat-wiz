@@ -11,7 +11,7 @@ import {
   TimingAnalyticsConfig,
   DEFAULT_ANALYTICS_CONFIG,
   STANDARD_TIME_BUDGETS
-} from './types';
+} from './types.js';
 
 export class TimingAnalytics {
   private config: TimingAnalyticsConfig;
