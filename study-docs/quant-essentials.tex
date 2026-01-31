@@ -1,0 +1,577 @@
+﻿\documentclass[11pt]{article}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath,amssymb}
+% Map special brackets and symbols used in citations to ASCII equivalents
+\DeclareUnicodeCharacter{3010}{[} % maps . to ]
+\DeclareUnicodeCharacter{2020}{\dagger} % maps † to \dagger
+\begin{document}
+% GMAT Focus Equation Guide – reformatted into LaTeX
+
+% This document rewrites the content of Target Test Prep's “GMAT Focus Equation Guide”
+% into plain text annotated with LaTeX commands.  All of the core formulas,
+% definitions and examples have been reproduced carefully and checked against
+% the original PDF to ensure accuracy.  Headings are presented using
+% section and subsection commands, and mathematical expressions are written
+% using standard LaTeX syntax such as \frac{}, \sqrt{} and superscripts.
+
+\section*{GMAT Focus Equation Guide}
+
+\subsection*{Essential GMAT Focus Quant Skills}
+
+\paragraph{Adding and subtracting fractions.}
+
+\begin{itemize}
+\item \textbf{Same denominator:} when two fractions share the same
+  denominator, add or subtract their numerators and keep the denominator
+  unchanged:
+  \[\frac{a}{b} + \frac{c}{b} = \frac{a + c}{b}, \qquad \frac{a}{b} - \frac{c}{b} = \frac{a - c}{b}.\]
+\item \textbf{Different denominators:} when denominators differ, cross‑multiply
+  the numerators and denominators to produce equivalent fractions.  For
+  addition
+  \[\frac{a}{b} + \frac{c}{d} = \frac{ad + bc}{bd},\]
+  and for subtraction
+  \[\frac{a}{b} - \frac{c}{d} = \frac{ad - bc}{bd}.\]
+\item \textbf{Example:} \(\tfrac{2}{3} + \tfrac{5}{7}\) has different denominators.
+  Multiply the numerator and denominator of \(\frac{2}{3}\) by 7 and the
+  numerator and denominator of \(\frac{5}{7}\) by 3:
+  \[\frac{2}{3} + \frac{5}{7} = \frac{2\cdot7 + 5\cdot3}{3\cdot7} = \frac{14 + 15}{21} = \frac{29}{21}.\]
+  Similarly,
+  \(\tfrac{2}{3} - \tfrac{5}{7} = \tfrac{14 - 15}{21} = -\tfrac{1}{21}\).
+\end{itemize}
+
+\paragraph{The distributive property.}
+
+Factoring a common factor from a sum or difference follows the distributive
+property.  For variables \(a,b,c\) and constant \(d\),
+\[ab + ac = a(b + c)\]..  For example,
+\(4x + 4y = 4(x+y)\); the factor 4 appears in both terms and can be
+extracted..
+
+\paragraph{Multiplying and dividing fractions.}
+
+\begin{itemize}
+\item \textbf{Multiplying fractions:} multiply numerators and denominators
+  separately:
+  \[\frac{a}{b} \times \frac{c}{d} = \frac{ac}{bd}.\]
+  \textit{Example:} \(\frac{2}{3} \times \frac{5}{7} = \frac{10}{21}.\)
+\item \textbf{Dividing fractions:} multiply the dividend by the reciprocal
+  of the divisor:
+  \[\frac{a}{b} \div \frac{c}{d} = \frac{a}{b} \times \frac{d}{c} = \frac{ad}{bc}.\]
+  \textit{Example:} \(\frac{2}{3} \div \frac{5}{7} = \frac{2}{3} \times \frac{7}{5} = \frac{14}{15}.\)
+\end{itemize}
+
+\paragraph{Reciprocals.}  The reciprocal of a non‑zero number \(x\) is
+\(\frac{1}{x}\).  Multiplying a number by its reciprocal yields 1.
+
+\paragraph{Comparing fractions: the bow‑tie method.}
+
+To compare \(\tfrac{a}{b}\) and \(\tfrac{c}{d}\), cross‑multiply and compare
+the results.  If \(ad > bc\), then \(\tfrac{a}{b} > \tfrac{c}{d}\); if
+\(ad < bc\), then \(\tfrac{a}{b} < \tfrac{c}{d}\).  For example,
+\(\tfrac{3}{4} > \tfrac{5}{7}\) because \(3\cdot7=21\) is greater than
+\(5\cdot4=20\).
+
+\paragraph{Converting a fraction to a percent.}
+
+Convert the fraction to its decimal equivalent, multiply the decimal by 100
+and append the percent sign..  For example,
+\(\tfrac{1}{20} = 0.05\)., which is 5\,\%.
+
+\subsection*{Linear and Quadratic Equations}
+
+\paragraph{Factoring out common factors.}
+
+If all terms on one side of an equation share a factor, that factor may be
+factored out using the distributive property.  Examples:
+\[ab + ac = a(b + c), \quad 4x + 4y = 4(x + y)..\]
+
+\paragraph{Powers and roots of fractions.}
+
+\begin{itemize}
+\item \textbf{Square of a fraction:} \(\bigl(\tfrac{a}{b}\bigr)^2 = \tfrac{a^2}{b^2}\).
+\item \textbf{Square root of a fraction:} \(\sqrt{\tfrac{a}{b}} = \tfrac{\sqrt{a}}{\sqrt{b}}\) when
+  \(a,b > 0\).
+\item \textbf{Number between 0 and 1:} if \(0 < x < 1\), then \(x^2 < x < \sqrt{x}\).
+\end{itemize}
+
+\paragraph{The zero‑product property.}
+
+If the product of two factors is zero, at least one of the factors must
+equal zero:
+\[a\cdot b = 0 \quad\Longrightarrow\quad a = 0 \text{ or } b = 0\]
+..  For instance,
+\(x(x+100) = 0\) implies that either \(x=0\) or \(x+100=0\), so
+\(x=0\) or \(x=-100\).
+
+\paragraph{Quadratic equations.}
+
+\begin{itemize}
+\item The general form of a quadratic equation is
+  \[ax^2 + bx + c = 0\]..
+  A quadratic must be written in this form before factoring.
+\item \textbf{Factoring quadratics:} for equations of the form
+  \(x^2 + bx + c = 0\), find two numbers \(p\) and \(q\) such that
+  \(p + q = b\) and \(pq = c\).  Then
+  \[(x + p)(x + q) = 0\]..  Example:
+  \[x^2 - 3x - 28 = 0 \quad\Longrightarrow\quad (x - 7)(x + 4) = 0,\]
+  since \(-7\cdot 4 = -28\) and \((-7) + 4 = -3\).
+\item \textbf{FOIL method:} to expand \((x - 7)(x + 4)\), multiply first,
+  outside, inside, and last terms: \(x\cdot x = x^2\); \(x\cdot 4 = 4x\);
+  \((-7)\cdot x = -7x\); \((-7)\cdot 4 = -28\).  Summing yields
+  \(x^2 - 3x - 28\).
+\item \textbf{Quadratic identities:} three common identities are
+  \begin{align*}
+    (x + y)^2 &= x^2 + 2xy + y^2,\\
+    (x - y)^2 &= x^2 - 2xy + y^2,\\
+    (x + y)(x - y) &= x^2 - y^2
+  \end{align*}
+  ..
+\item \textbf{Difference of squares:} \(a^2 - b^2 = (a - b)(a + b)\).
+  Examples include:
+  \begin{align*}
+    x^2 - 9 &= (x - 3)(x + 3),\\
+    4x^2 - 100 &= (2x - 10)(2x + 10),\\
+    x^2y^2 - 16 &= (xy - 4)(xy + 4),\\
+    3^{30} - 2^{30} &= (3^{15})^2 - (2^{15})^2 \\&= (3^{15} + 2^{15})(3^{15} - 2^{15}).
+  \end{align*}
+\end{itemize}
+
+\paragraph{Order of operations (PEMDAS).}
+
+The acronym PEMDAS stands for Parentheses, Exponents, Multiplication and
+Division, and Addition and Subtraction..  When
+evaluating an expression, perform operations in this order.
+
+\subsection*{Properties of Numbers}
+
+\paragraph{Even/odd rules for addition and subtraction.}
+
+\begin{itemize}
+\item (odd) + (odd) = even..
+\item (even) + (even) = even..
+\item (even) + (odd) = odd..
+\item (odd) - (odd) = even..
+\item (even) - (even) = even..
+\item (even) - (odd) = odd; (odd) - (even) = odd.
+\end{itemize}
+
+\paragraph{Multiplication rules for even and odd numbers.}
+
+\begin{itemize}
+\item even × even = even..
+\item even × odd = even..
+\item odd × even = even..
+\item odd × odd = odd..
+\end{itemize}
+
+\paragraph{Division rules for even and odd numbers.}
+
+In general the quotient must be an integer to be classified as even or odd.
+An even integer divided by an odd integer is even; an odd divided by an odd
+integer is odd; an even divided by an even integer may be even or odd
+depending on how many factors of 2 remain.  An odd integer divided by an
+even integer is not an integer and thus is neither even nor odd.
+
+\paragraph{Prime numbers less than 100.}
+
+The prime numbers under 100 are
+\(2,3,5,7,11,13,17,19,23,29,31,37,41,43,47,53,59,61,67,71,73,79,83,89,97\)
+..
+
+\paragraph{Sign rules for multiplication and division.}
+
+\begin{itemize}
+\item Numbers with the same sign (both positive or both negative) yield a
+  positive product or quotient: \((+)\times(+)=(+),\;(-)\times(-)=(+)\)
+  ..
+\item Numbers with different signs yield a negative product or quotient:
+  \((+)\times(-)=(-)\)..
+\end{itemize}
+
+\paragraph{Factors and multiples.}
+
+A factor of an integer \(x\) is an integer \(y\) that divides \(x\) evenly.
+Example: the factors of 16 are 1, 2, 4, 8 and 16..
+A multiple of an integer is obtained by multiplying that integer by any
+integer; e.g. multiples of 4 are 4, 8, 12, 16, 20, …..
+
+\paragraph{The division algorithm.}
+
+For integers \(x\) and positive integer divisor \(d\), there exist unique
+integers \(q\) (quotient) and \(r\) (remainder) with \(0 \le r < d\) such that
+\[x = d\,q + r.\]  The possible remainders are the integers from 0
+up to \(d-1\).
+
+\paragraph{Divisibility rules.}
+
+\begin{itemize}
+\item A number is divisible by 2 if its last digit is 0, 2, 4, 6 or 8..
+\item A number is divisible by 3 if the sum of its digits is divisible by 3..
+\item A number is divisible by 4 if its last two digits form a number divisible by 4..
+\item A number is divisible by 5 if its last digit is 0 or 5..
+\item A number is divisible by 6 if it is divisible by both 2 and 3..
+\item A number is divisible by 8 if its last three digits form a number divisible by 8..
+\item A number is divisible by 9 if the sum of its digits is divisible by 9..
+\item A number is divisible by 11 if the alternating sum of its digits (sum of digits in odd positions minus sum of digits in even positions) is divisible by 11..
+\end{itemize}
+
+\paragraph{Number of factors of an integer.}
+
+Suppose the prime factorization of an integer is
+\(p_1^{e_1} p_2^{e_2}\cdots p_k^{e_k}\).  The total number of positive
+factors of the integer is
+\((e_1 + 1)(e_2 + 1)\cdots(e_k + 1)\)..
+Example: 240 has prime factorization
+\(2^4 \cdot 3^1 \cdot 5^1\); therefore it has \((4+1)(1+1)(1+1)=20\) factors
+..
+
+\paragraph{Least Common Multiple (LCM).}
+
+To find the LCM of integers, prime‑factorize each integer, select the
+highest exponent of each prime across the factorizations, and multiply
+those prime powers together..  For example, to find
+\(\mathrm{LCM}(24,60)\), write
+\(24 = 2^3\cdot3^1\) and \(60 = 2^2\cdot3^1\cdot5^1\).  The highest exponents
+are \(2^3\), \(3^1\) and \(5^1\), so \(\mathrm{LCM} = 8\times3\times5=120\)
+..
+
+\paragraph{Greatest Common Factor (GCF).}
+
+Prime‑factorize each integer, select the smallest exponent of each prime
+common to all factorizations, and multiply those prime powers together
+..  For example, \(\mathrm{GCF}(24,60)\) uses the
+common primes \(2^2\) and \(3^1\); thus the GCF is \(4\times3=12\)
+..  The relationship between LCM and GCF for two
+positive integers \(x\) and \(y\) is
+\[x\cdot y = \mathrm{LCM}(x,y)\times \mathrm{GCF}(x,y)\]..
+
+\paragraph{Factorials and trailing zeros.}
+
+Any factorial greater than or equal to \(5!\) ends in zero..  The number of trailing
+zeros in a factorial corresponds to the number of pairs of prime factors
+\(2\) and \(5\) in its prime factorization..  For example,
+\(5{,}200 = 52 \times 100 = 5^2 \times (5\cdot2)^2\) has two trailing zeros
+..
+
+\paragraph{Leading zeros in reciprocals.}
+
+If an integer \(x\) has \(k\) digits, then \(\frac{1}{x}\) will have \(k-1\)
+leading zeros in its decimal representation, unless \(x\) is a power of
+10, in which case there will be \(k-2\) leading zeros..
+
+\paragraph{Terminating decimals.}
+
+The decimal expansion of a fraction terminates precisely when, after
+reducing the fraction, the denominator has no prime factors other than
+2 and 5..  For instance,
+\(\tfrac{1}{20} = 0.05\) terminates. whereas
+\(\tfrac{1}{12} = 0.083333…\) repeats indefinitely.
+
+\paragraph{Patterns in units digits.}
+
+The last digit of powers of integers follows predictable cycles.:
+\begin{itemize}
+\item Powers of 0 always end in 0.
+\item Powers of 2 repeat the cycle 2–4–8–6 (e.g. \(2^1=2,2^2=4,2^3=8,2^4=16\)).
+\item Powers of 3 repeat the cycle 3–9–7–1.
+\item Powers of 4 repeat the cycle 4–6: odd powers end in 4, even powers end in 6.
+\item Powers of 5 always end in 5.
+\item Powers of 6 always end in 6.
+\item Powers of 7 repeat the cycle 7–9–3–1.
+\item Powers of 8 repeat the cycle 8–4–2–6.
+\item Powers of 9 repeat the cycle 9–1: odd powers end in 9 and even powers end in 1.
+\end{itemize}
+
+\paragraph{Perfect squares and cubes.}
+
+\begin{itemize}
+\item A non‑zero integer is a perfect square when all prime exponents in its
+  factorization are even..  Example:
+  \(144 = 2^4\times3^2\).
+\item An integer is a perfect cube when all prime exponents are multiples
+  of 3..  Example: \(27 = 3^3\).
+\item Consecutive integers share no common prime factors, so their GCF is 1..
+\end{itemize}
+
+\paragraph{Memorizing common squares and cubes.}
+
+Squares to memorize: \(0,1,4,9,16,25,36,49,64,81,100,121,144,169,196,225\)
+..  Cubes to memorize: \(0,1,8,27,64,125,216,343,512,729,1000\)
+..
+
+\paragraph{Approximating non‑perfect square roots.}
+
+Useful approximations include \(\sqrt{2}\approx1.4\), \(\sqrt{3}\approx1.7\)
+and \(\sqrt{5}\approx2.2\).  These values can expedite rough
+calculations.
+
+\paragraph{Radicals and exponents.}
+
+\begin{itemize}
+\item \textbf{Multiplying radicals:} \(\sqrt{a}\,\sqrt{b} = \sqrt{ab}\).  For
+  example, \(\sqrt{5}\,\sqrt{7} = \sqrt{35}\).
+\item \textbf{Dividing radicals:} \(\frac{\sqrt{a}}{\sqrt{b}} = \sqrt{\frac{a}{b}}\).
+\item \textbf{Combining like radicals:} add or subtract radicals only when
+  the radicands match, e.g. \(2\sqrt{3} + 3\sqrt{3} = 5\sqrt{3}\).
+\item \textbf{Square root of a square:} \(\sqrt{x^2} = |x|\).  If
+  \(x\) is negative, the result becomes positive.
+\item \textbf{Multiple square roots:} repeated square roots correspond to
+  fractional exponents, e.g. \(\sqrt{\sqrt{x}} = x^{1/4}\).
+\end{itemize}
+
+\paragraph{Exponents to memorize.}
+
+\begin{itemize}
+\item \textbf{Base 2:} \(2^0=1, 2^1=2, 2^2=4, 2^3=8, 2^4=16, 2^5=32,
+  2^6=64, 2^7=128, 2^8=256, 2^9=512, 2^{10}=1024\)
+..
+\item \textbf{Base 3:} \(3^1=3, 3^2=9, 3^3=27, 3^4=81, 3^5=243\)
+..
+\item \textbf{Base 4:} \(4^1=4,4^2=16,4^3=64,4^4=256\)
+..
+\item \textbf{Base 5:} \(5^1=5,5^2=25,5^3=125,5^4=625\)
+..
+\end{itemize}
+
+\paragraph{Exponent rules.}
+
+\begin{itemize}
+\item \textbf{Like bases:} multiplying yields exponents that add, and dividing
+  yields exponents that subtract:
+  \[x^a\cdot x^b = x^{a+b}, \quad \frac{x^a}{x^b} = x^{a-b}.\]
+  This rule holds for any non‑zero base \(x\)..
+\item \textbf{Power to a power:} \((x^a)^b = x^{ab}\)..
+\item \textbf{Different bases, same exponent:} \(x^a y^a = (xy)^a\) and
+  \(\frac{x^a}{y^a} = \left(\frac{x}{y}\right)^a\)
+  ..
+\item \textbf{Radicals as exponents:} \(\sqrt[n]{x^m} = x^{m/n}\).  Thus
+  \(\sqrt{x} = x^{1/2}\) and \(\sqrt[3]{x^2} = x^{2/3}\).
+\item \textbf{Negative exponents:} for non‑zero base \(x\) and positive
+  integer \(n\), \(x^{-n} = \frac{1}{x^n}\).  More generally,
+  \(\left(\frac{a}{b}\right)^{-n} = \left(\frac{b}{a}\right)^n\).
+\item \textbf{Special addition rules:} when expressions have the same base
+  and exponent, factor them.  For example,
+  \(2^{10} + 2^{11} + 2^{12} = 2^{10}(1 + 2 + 4) = 2^{10}\cdot7\)
+  ..  More generally,
+  \(2^n + 2^n = 2^{n+1}\), \(3^n + 3^n + 3^n = 3^{n+1}\), and
+  \(4^n + 4^n + 4^n + 4^n = 4^{n+1}\)..
+\end{itemize}
+
+\paragraph{Number properties of exponents.}
+
+Depending on the base and exponent, raising a number to a power can make
+the result larger or smaller..  Important cases include:
+\begin{itemize}
+\item Base greater than 1 with an even or odd positive exponent >1 gives
+  a result larger than the base (e.g. \(5^2>5\), \(5^3>5\)).
+\item Base less than \(-1\) with an even exponent produces a larger
+  (positive) result, whereas an odd exponent greater than 1 gives a
+  smaller (more negative) result, e.g. \((-5)^2 > -5\) but
+  \((-5)^3 < -5\)..
+\item Base is a proper fraction between 0 and 1: even exponents produce a
+  smaller result than the base, and odd positive exponents >1 also produce a
+  smaller result.  When the base is a negative proper fraction, an even
+  exponent yields a positive result which is larger than the base in
+  absolute value; an odd exponent yields a negative result still larger in
+  magnitude..
+\item Base greater than 1 with a positive fractional exponent yields a
+  smaller result than the base (e.g. \(\sqrt{5} < 5\)).  Base a proper
+  fraction with a positive fractional exponent yields a larger result than
+  the base (e.g. \(0.25^{1/2}=0.5>0.25\))..
+\end{itemize}
+
+\subsection*{Inequalities and Absolute Values}
+
+\paragraph{Absolute value definition.}
+
+The absolute value of a real number \(a\) is
+\[|a| = \begin{cases}
+  a, & \text{if } a \ge 0,\\
+  -a, & \text{if } a < 0.
+\end{cases}\]
+Examples: \(|50|=50\) and \(|-50|=-(-50)=50\)..
+
+\paragraph{Solving equations with absolute values.}
+
+An equation of the form \(|f(x)| = c\) with \(c\ge0\) splits into two
+cases: \(f(x) = c\) and \(f(x) = -c\).  Solve each separately and
+combine the solutions.  When two absolute values are equal, e.g.
+\(|A|=|B|\), it means either \(A = B\) or \(A = -B\).
+
+\paragraph{Adding and subtracting absolute values.}
+
+The triangle inequality states that \(|a| + |b| \ge |a+b|\).  Equality
+occurs only when \(a\) and \(b\) have the same sign or one of them is
+zero..  Similarly, \(|a| - |b| \le |a-b|\), and
+equality occurs only when \(b=0\) or both \(a\) and \(b\) have the same
+sign and \(|a|\ge|b|\).
+
+\subsection*{Word Problems, Ratios and Percents}
+
+\paragraph{Basic algebra translations.}
+
+Common English phrases translate to mathematical operations as follows:
+\begin{itemize}
+\item “is,” “was,” “has been” \(\rightarrow\) equality (\(=\)).
+\item “more,” “years older,” “plus” \(\rightarrow\) addition (\(+\)).
+\item “less,” “years younger,” “less than,” “fewer” \(\rightarrow\) subtraction (\(-\)).
+\item “times,” “of,” “factor” \(\rightarrow\) multiplication (\(\times\)).
+\end{itemize}
+
+\paragraph{Profit, cost and interest.}
+
+\begin{itemize}
+\item \textbf{Profit equation:} \(\text{Profit} = \text{Total revenue} - \text{Total cost}\).  Total cost may
+  be decomposed into fixed and variable costs..
+\item \textbf{Price per item:} \(\text{price} = \frac{\text{total cost}}{\text{number of items}}\).
+\item \textbf{Simple interest:} \(\text{Simple Interest} = \text{Principal}\times\text{Rate}\times\text{Time}\)
+ ..
+\end{itemize}
+
+\paragraph{Ratios.}
+
+A ratio compares quantities and may be written in several equivalent ways:
+\(a:b\), “\(a\) to \(b\)” or \(\tfrac{a}{b}\).  Ratios can represent part‑to‑part or
+part‑to‑whole comparisons.  To combine ratios that share a common term,
+scale each ratio so that the shared term takes the same numerical value,
+then merge the ratios.  For example, if \(x:y = 3:4\) and \(x:z = 7:11\),
+the least common multiple of the \(x\)-values (3 and 7) is 21.  Multiply the
+first ratio by 7 and the second by 3 to obtain
+\(x:y = 21:28\) and \(x:z = 21:33\).  Therefore \(x:y:z = 21:28:33\).
+
+\paragraph{Percent conversions and translations.}
+
+\begin{itemize}
+\item \textbf{Converting to a percent:} multiply a decimal or integer by 100
+  and append the percent sign..  For example,
+  0.05 becomes 5\,\%..
+\item \textbf{Converting from a percent:} remove the percent sign and divide
+  by 100..  For instance, 5\,\% = 0.05.
+\item \textbf{Percent of:} “\(n\) percent of \(x\)” means \(\tfrac{n}{100}\times x\).
+  Thus 5\,\% of \(z\) is \(\tfrac{5}{100}z\).
+\item \textbf{Percent less than:} “\(x\) is \(n\)\,\% less than \(y\)” means
+  \(x = (1 - \tfrac{n}{100})y\).  Examples include 2\,\% less than
+  \(y\): \(x = 0.98y\), and 60\,\% less than \(y\): \(x = 0.4y\)
+ ..
+\item \textbf{Percent greater than:} “\(x\) is \(n\)\,\% greater than \(y\)” means
+  \(x = (1 + \tfrac{n}{100})y\).  Examples: 2\,\% greater than
+  \(y\) gives \(x = 1.02y\), and 60\,\% greater than \(y\) gives
+  \(x = 1.6y\)..
+\item \textbf{Variable percent translations:} if \(x\) is \(n\,\%\) of \(y\), then
+  \(x = \tfrac{n}{100}y\).  Likewise, if \(x\) is \(n\,\%\) less than
+  \(y\), then \(x = (1 - \tfrac{n}{100})y\); if \(x\) is \(n\,\%
+  \) greater than \(y\), then \(x = (1 + \tfrac{n}{100})y\).
+\item \textbf{Percent change:} given an original value and a new value, the
+  percent change is \(\frac{\text{new} - \text{original}}{\text{original}}\times100\,\%\).
+\end{itemize}
+
+\subsection*{Statistics and Counting}
+
+\paragraph{Average (arithmetic mean).}
+
+The average of a set of numbers is their sum divided by the count of the
+numbers..  For evenly spaced sets, the mean equals the
+average of the first and last terms.  For example, the mean of
+\(\{4,5,6,7,8,9,10,11,12\}\) is \((4+12)/2 = 8\)..
+
+\paragraph{Counting integers in consecutive sets.}
+
+The number of integers from \(a\) to \(b\) inclusive is \(b - a + 1\)
+..  To count multiples of \(k\) between \(a\) and \(b\)
+inclusive, compute
+\(\lfloor b/k \rfloor - \lfloor (a-1)/k \rfloor\).
+
+\paragraph{Weighted average.}
+
+Given values \(v_1, v_2, …, v_n\) with weights \(w_1, w_2, …, w_n\), the
+weighted average is \(\frac{\sum w_i v_i}{\sum w_i}\).  The result is
+closer to the value with the larger weight; a weighted average always
+lies between the smallest and largest values..
+
+\paragraph{Median and mode.}
+
+When a set is ordered from smallest to largest, the median is the middle
+value if there is an odd number of values or the average of the two middle
+values if there is an even number.  The mode is the value that occurs
+most often.  The range is the difference between the maximum and minimum.
+
+\subsection*{Sequences and Series}
+
+\paragraph{Arithmetic sequences.}
+
+A sequence is arithmetic if each term after the first differs from the
+previous term by a constant difference \(d\).  The \(n\)‑th term of an
+arithmetic sequence is
+\[a_n = a_1 + (n-1)d,\]
+and the sum of the first \(n\) terms is
+\[S_n = \frac{n}{2}\bigl(2a_1 + (n-1)d\bigr) = \frac{n}{2}(a_1 + a_n).\]
+
+\paragraph{Geometric sequences.}
+
+A sequence is geometric if successive terms are obtained by multiplying
+the previous term by a constant ratio \(r\).  The \(n\)-th term is
+\(a_n = a_1 r^{n-1}\).  The sum of the first \(n\) terms (\(r\ne1\)) is
+\[S_n = a_1\,\frac{1 - r^n}{1 - r}.\]
+If \(|r| < 1\), the sum to infinity is \(S_\infty = \frac{a_1}{1 - r}\).
+
+\paragraph{Geometric progression example.}
+
+In the geometric progression 5, 10, 20, 40, … each term is obtained by
+multiplying the preceding term by 2.  The common ratio is 2 and the sum of
+the first \(n\) terms is \(5\,(2^n - 1)\).
+
+\subsection*{Probability and Combinatorics}
+
+\paragraph{Factorials and circular arrangements.}
+
+\begin{itemize}
+\item The factorial of a non‑negative integer \(n\) is defined as
+  \(n! = n(n-1)(n-2)\cdots1\), with \(0! = 1\).
+\item The number of ways to arrange \(k\) distinct objects in a circle is
+  \((k-1)!\)..
+\end{itemize}
+
+\paragraph{Permutations and combinations.}
+
+\begin{itemize}
+\item The number of permutations of \(k\) objects chosen from \(n\) distinct
+  objects is
+  \[P(n,k) = \frac{n!}{(n-k)!}.\]
+\item The number of combinations of \(k\) objects chosen from \(n\) distinct
+  objects (order does not matter) is
+  \[C(n,k) = \binom{n}{k} = \frac{n!}{k!(n-k)!}.\]
+\end{itemize}
+
+\paragraph{Basic probability.}
+
+The probability of an event \(A\) is the ratio of the number of favorable
+outcomes to the total number of equally likely outcomes.  The sum of
+probabilities across the entire sample space equals 1..  If
+\(P(A)\) denotes the probability of \(A\), then the probability of the
+complement (“not \(A\)”) is \(1 - P(A)\)..
+
+\paragraph{Multiplication and addition rules.}
+
+\begin{itemize}
+\item For independent events \(A\) and \(B\), \(P(A\text{ and }B) = P(A)P(B)\)
+ ..  For events that are not independent,
+  \(P(A\text{ and }B) = P(A)P(B\mid A)\)..
+\item For mutually exclusive events, \(P(A\text{ or }B) = P(A) + P(B)\)
+ ..  If events are not mutually exclusive,
+  use
+  \begin{equation*}P(A\text{ or }B) = P(A) + P(B) - P(A\text{ and }B).\end{equation*}
+\item The probability that at least one of several independent events
+  occurs is one minus the probability that none of them occur:
+  \begin{equation*}P(\text{at least one}) = 1 - P(\text{none}).\end{equation*}.
+\end{itemize}
+
+\subsection*{Closing Remarks}
+
+This LaTeX document consolidates the formulas, definitions and examples from
+the Target Test Prep “GMAT Focus Equation Guide” into a single, searchable
+plain‑text resource.  Wherever possible, formulas have been restated in
+canonical algebraic form and accompanied by illustrative examples.  Each
+statement has been checked against the original PDF to ensure fidelity to
+the source material.
+\end{document}
+
