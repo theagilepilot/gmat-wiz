@@ -107,10 +107,13 @@ export function tableExists(tableName: string): boolean {
   return result.length > 0 && result[0]!.values.length > 0;
 }
 
+// sql.js SqlValue type
+type SqlValue = string | number | null | Uint8Array;
+
 /**
  * Execute a query and return results
  */
-export function query<T = Record<string, unknown>>(sql: string, params: unknown[] = []): T[] {
+export function query<T = Record<string, unknown>>(sql: string, params: SqlValue[] = []): T[] {
   const database = getDatabase();
   const stmt = database.prepare(sql);
   stmt.bind(params);
@@ -128,7 +131,7 @@ export function query<T = Record<string, unknown>>(sql: string, params: unknown[
 /**
  * Execute a query and return first result
  */
-export function queryOne<T = Record<string, unknown>>(sql: string, params: unknown[] = []): T | undefined {
+export function queryOne<T = Record<string, unknown>>(sql: string, params: SqlValue[] = []): T | undefined {
   const results = query<T>(sql, params);
   return results[0];
 }
@@ -136,7 +139,7 @@ export function queryOne<T = Record<string, unknown>>(sql: string, params: unkno
 /**
  * Execute a statement (INSERT, UPDATE, DELETE)
  */
-export function execute(sql: string, params: unknown[] = []): void {
+export function execute(sql: string, params: SqlValue[] = []): void {
   const database = getDatabase();
   database.run(sql, params);
   saveDatabase();

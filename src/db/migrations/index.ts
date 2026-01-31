@@ -15,13 +15,20 @@ interface Migration {
 
 // Import migrations
 import { migration001 } from './001_initial_schema.js';
+import { migration002 } from './002_skill_atoms.js';
+import { migration003 } from './003_questions_attempts.js';
+import { migration004 } from './004_error_logs.js';
+import { migration005 } from './005_elo_ratings.js';
+import { migration006 } from './006_scheduling.js';
 
 // Register all migrations in order
 const migrations: Migration[] = [
   migration001,
-  // Future migrations will be added here:
-  // migration002,
-  // migration003,
+  migration002,
+  migration003,
+  migration004,
+  migration005,
+  migration006,
 ];
 
 /**
@@ -55,7 +62,7 @@ function getAppliedMigrations(): Set<string> {
     return new Set();
   }
   
-  const names = result[0]!.values.map(row => row[0] as string);
+  const names = result[0]!.values.map((row: unknown[]) => row[0] as string);
   return new Set(names);
 }
 

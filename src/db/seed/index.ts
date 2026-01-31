@@ -66,7 +66,7 @@ export function clearSeededData(): void {
   const db = getDatabase();
   
   // Tables to clear (in reverse dependency order)
-  const tablesToClear = [
+  const tablesToClear: string[] = [
     // These will be added as tables are created
     // 'mastery_gates',
     // 'training_blocks',
