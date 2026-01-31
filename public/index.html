@@ -4,7 +4,14 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>GMAT Ascension</title>
+  <!-- CSS - Design System -->
+  <link rel="stylesheet" href="/css/variables.css">
+  <link rel="stylesheet" href="/css/components.css">
+  <link rel="stylesheet" href="/css/layout.css">
   <link rel="stylesheet" href="/css/main.css">
+  <!-- CSS - Views -->
+  <link rel="stylesheet" href="/css/dashboard.css">
+  <link rel="stylesheet" href="/css/question.css">
 </head>
 <body>
   <div id="app">
@@ -33,98 +40,48 @@
     <main class="app-main" id="main-content">
       <!-- Loading state -->
       <div class="loading-screen" id="loading-screen">
-        <div class="loader"></div>
-        <p>Initializing GMAT Ascension...</p>
+        <div class="spinner"></div>
+        <p class="loading-text">Initializing GMAT Ascension...</p>
       </div>
 
       <!-- Dashboard (default view) -->
       <div class="view" id="dashboard-view" style="display: none;">
-        <div class="dashboard">
-          <section class="dashboard-section readiness">
-            <h2>Readiness Score</h2>
-            <div class="readiness-gauge" id="readiness-gauge">
-              <div class="gauge-value">--</div>
-              <div class="gauge-label">Loading...</div>
-            </div>
-          </section>
-
-          <section class="dashboard-section daily-plan">
-            <h2>Today's Training</h2>
-            <div class="training-blocks" id="training-blocks">
-              <p class="empty-state">Loading your training plan...</p>
-            </div>
-          </section>
-
-          <section class="dashboard-section quick-stats">
-            <h2>Quick Stats</h2>
-            <div class="stats-grid" id="stats-grid">
-              <div class="stat-card">
-                <div class="stat-value" id="stat-streak">--</div>
-                <div class="stat-label">Day Streak</div>
-              </div>
-              <div class="stat-card">
-                <div class="stat-value" id="stat-xp">--</div>
-                <div class="stat-label">Total XP</div>
-              </div>
-              <div class="stat-card">
-                <div class="stat-value" id="stat-accuracy">--</div>
-                <div class="stat-label">Accuracy</div>
-              </div>
-              <div class="stat-card">
-                <div class="stat-value" id="stat-questions">--</div>
-                <div class="stat-label">Questions</div>
-              </div>
-            </div>
-          </section>
-
-          <section class="dashboard-section actions">
-            <button class="btn btn-primary btn-large" id="start-training-btn">
-              Start Training
-            </button>
-            <div class="secondary-actions">
-              <button class="btn btn-secondary" id="view-analytics-btn">Analytics</button>
-              <button class="btn btn-secondary" id="view-levels-btn">Levels</button>
-              <button class="btn btn-secondary" id="view-errors-btn">Error Log</button>
-            </div>
-          </section>
-        </div>
+        <!-- Dashboard component will render here -->
       </div>
 
-      <!-- Question View (shown during training) -->
+      <!-- Training/Question View (shown during training) -->
       <div class="view" id="question-view" style="display: none;">
-        <div class="question-container">
-          <div class="question-header">
-            <span class="question-type" id="question-type">Loading...</span>
-            <span class="question-difficulty" id="question-difficulty">--</span>
-          </div>
-          
-          <div class="question-stem" id="question-stem">
-            <!-- Question text will be inserted here -->
-          </div>
+        <!-- TrainingBlock component will render here -->
+      </div>
 
-          <div class="choices" id="choices">
-            <!-- Answer choices will be inserted here -->
-          </div>
-
-          <div class="question-actions">
-            <button class="btn btn-hint" id="hint-btn" title="Request Hint (H)">
-              💡 Hint
-            </button>
-            <button class="btn btn-primary" id="submit-btn" disabled>
-              Submit (Enter)
-            </button>
+      <!-- Analytics View -->
+      <div class="view" id="analytics-view" style="display: none;">
+        <div class="container">
+          <h2 class="text-2xl font-bold mb-4">Analytics</h2>
+          <div class="card">
+            <p class="text-muted">Coming soon - detailed performance analytics</p>
           </div>
         </div>
       </div>
 
-      <!-- Outcome View (after answering) -->
-      <div class="view" id="outcome-view" style="display: none;">
-        <!-- Outcome classification UI will be inserted here -->
+      <!-- Levels View -->
+      <div class="view" id="levels-view" style="display: none;">
+        <div class="container">
+          <h2 class="text-2xl font-bold mb-4">Mastery Levels</h2>
+          <div class="card">
+            <p class="text-muted">Coming soon - skill mastery progression</p>
+          </div>
+        </div>
       </div>
 
-      <!-- Reflection View -->
-      <div class="view" id="reflection-view" style="display: none;">
-        <!-- Reflection prompts and explanation will be inserted here -->
+      <!-- Error Log View -->
+      <div class="view" id="errors-view" style="display: none;">
+        <div class="container">
+          <h2 class="text-2xl font-bold mb-4">Error Log</h2>
+          <div class="card">
+            <p class="text-muted">Coming soon - review your mistakes</p>
+          </div>
+        </div>
       </div>
     </main>
 
@@ -152,6 +109,20 @@
   <!-- Toast Notifications -->
   <div class="toast-container" id="toast-container"></div>
 
+  <!-- JavaScript - Utilities -->
+  <script src="/js/utils/keyboard.js"></script>
+  <script src="/js/utils/api.js"></script>
+  
+  <!-- JavaScript - Components -->
+  <script src="/js/components/Timer.js"></script>
+  <script src="/js/components/ReadinessGauge.js"></script>
+  <script src="/js/components/DailyPlan.js"></script>
+  <script src="/js/components/QuickStats.js"></script>
+  <script src="/js/components/Dashboard.js"></script>
+  <script src="/js/components/Question.js"></script>
+  <script src="/js/components/TrainingBlock.js"></script>
+  
+  <!-- JavaScript - Main App -->
   <script src="/js/app.js" type="module"></script>
 </body>
 </html>

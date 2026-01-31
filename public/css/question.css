@@ -1,0 +1,526 @@
+/* ===================================
+   GMAT Ascension - Question Styles
+   =================================== */
+
+/* Question Container */
+.question {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-5);
+  max-width: 800px;
+  margin: 0 auto;
+  padding: var(--space-4);
+}
+
+/* =====================
+   Question Header
+   ===================== */
+.question-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-4);
+}
+
+.question-meta {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  flex-wrap: wrap;
+}
+
+.question-timer {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  padding: var(--space-2) var(--space-3);
+  background: var(--bg-tertiary);
+  border-radius: var(--radius-md);
+  font-family: var(--font-mono);
+  font-size: var(--text-sm);
+  color: var(--text-secondary);
+}
+
+.question-timer.warning {
+  background: var(--warning-bg);
+  color: var(--warning);
+}
+
+.timer-icon {
+  font-size: var(--text-base);
+}
+
+/* =====================
+   Question Stem
+   ===================== */
+.question-stem {
+  font-size: var(--text-lg);
+  line-height: var(--leading-relaxed);
+  color: var(--text-primary);
+  padding: var(--space-5);
+  background: var(--bg-secondary);
+  border-radius: var(--radius-lg);
+  border: var(--border-width) solid var(--border-color);
+}
+
+.question-stem code {
+  background: var(--bg-tertiary);
+  padding: 0.1em 0.4em;
+  border-radius: var(--radius-sm);
+  font-family: var(--font-mono);
+  font-size: 0.9em;
+}
+
+.question-stem strong {
+  color: var(--text-primary);
+  font-weight: var(--weight-semibold);
+}
+
+/* =====================
+   Choices
+   ===================== */
+.choice-list {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+}
+
+.choice {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-4);
+  padding: var(--space-4);
+  background: var(--bg-secondary);
+  border: var(--border-width-2) solid var(--border-color);
+  border-radius: var(--radius-md);
+  cursor: pointer;
+  transition: all var(--transition-fast);
+}
+
+.choice:hover:not(.correct):not(.incorrect) {
+  background: var(--bg-hover);
+  border-color: var(--border-color-hover);
+}
+
+.choice:focus {
+  outline: none;
+  border-color: var(--accent-primary);
+  box-shadow: 0 0 0 3px var(--accent-glow);
+}
+
+.choice.selected {
+  background: var(--accent-bg);
+  border-color: var(--accent-primary);
+}
+
+.choice.correct {
+  background: var(--success-bg);
+  border-color: var(--success);
+  cursor: default;
+}
+
+.choice.incorrect {
+  background: var(--error-bg);
+  border-color: var(--error);
+  cursor: default;
+}
+
+.choice-letter {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  background: var(--bg-tertiary);
+  border-radius: var(--radius-md);
+  font-weight: var(--weight-semibold);
+  color: var(--text-secondary);
+  flex-shrink: 0;
+  transition: all var(--transition-fast);
+}
+
+.choice.selected .choice-letter {
+  background: var(--accent-primary);
+  color: var(--text-primary);
+}
+
+.choice.correct .choice-letter {
+  background: var(--success);
+  color: var(--text-inverse);
+}
+
+.choice.incorrect .choice-letter {
+  background: var(--error);
+  color: var(--text-primary);
+}
+
+.choice-text {
+  flex: 1;
+  line-height: var(--leading-relaxed);
+  padding-top: var(--space-1);
+}
+
+/* =====================
+   Submit Bar
+   ===================== */
+.submit-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-4);
+  padding-top: var(--space-4);
+  border-top: var(--border-width) solid var(--border-color);
+}
+
+.kbd-hints {
+  display: flex;
+  gap: var(--space-4);
+}
+
+.kbd-hint {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  font-size: var(--text-sm);
+  color: var(--text-muted);
+}
+
+.kbd-hint kbd {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 24px;
+  height: 24px;
+  padding: 0 var(--space-2);
+  background: var(--bg-tertiary);
+  border: var(--border-width) solid var(--border-color);
+  border-radius: var(--radius-sm);
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+}
+
+/* =====================
+   Result Feedback
+   ===================== */
+.result-feedback {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  padding: var(--space-3) var(--space-4);
+  border-radius: var(--radius-md);
+}
+
+.result-feedback.correct {
+  background: var(--success-bg);
+}
+
+.result-feedback.incorrect {
+  background: var(--error-bg);
+}
+
+.result-icon {
+  font-size: var(--text-xl);
+  font-weight: var(--weight-bold);
+}
+
+.result-feedback.correct .result-icon {
+  color: var(--success);
+}
+
+.result-feedback.incorrect .result-icon {
+  color: var(--error);
+}
+
+.result-text {
+  font-weight: var(--weight-semibold);
+  color: var(--text-primary);
+}
+
+.elo-change {
+  font-size: var(--text-sm);
+  font-weight: var(--weight-medium);
+  padding: var(--space-1) var(--space-2);
+  border-radius: var(--radius-sm);
+}
+
+.elo-change.positive {
+  background: var(--success-bg);
+  color: var(--success);
+}
+
+.elo-change.negative {
+  background: var(--error-bg);
+  color: var(--error);
+}
+
+/* =====================
+   Explanation
+   ===================== */
+.explanation {
+  background: var(--bg-secondary);
+  border: var(--border-width) solid var(--border-color);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+}
+
+.explanation-header {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  padding: var(--space-3) var(--space-4);
+  background: var(--bg-tertiary);
+  border-bottom: var(--border-width) solid var(--border-color);
+}
+
+.explanation-icon {
+  font-size: var(--text-lg);
+}
+
+.explanation-title {
+  font-weight: var(--weight-semibold);
+  color: var(--text-primary);
+}
+
+.explanation-content {
+  padding: var(--space-4);
+  line-height: var(--leading-relaxed);
+  color: var(--text-secondary);
+}
+
+/* =====================
+   Training Block
+   ===================== */
+.training-block {
+  display: flex;
+  flex-direction: column;
+  min-height: calc(100vh - var(--header-height) - var(--nav-height));
+}
+
+.block-header {
+  display: flex;
+  align-items: center;
+  gap: var(--space-4);
+  padding: var(--space-4);
+  background: var(--bg-secondary);
+  border-bottom: var(--border-width) solid var(--border-color);
+}
+
+.block-mode {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  padding: var(--space-2) var(--space-3);
+  background: color-mix(in srgb, var(--mode-color, var(--accent-primary)) 15%, transparent);
+  border-radius: var(--radius-md);
+  color: var(--mode-color, var(--accent-primary));
+  font-weight: var(--weight-medium);
+}
+
+.block-progress {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-1);
+}
+
+.progress-text {
+  font-size: var(--text-sm);
+  color: var(--text-secondary);
+  text-align: center;
+}
+
+.progress-sep {
+  margin: 0 var(--space-1);
+  color: var(--text-muted);
+}
+
+.block-content {
+  flex: 1;
+  padding: var(--space-4);
+  overflow-y: auto;
+}
+
+.block-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: var(--space-4);
+  background: var(--bg-secondary);
+  border-top: var(--border-width) solid var(--border-color);
+}
+
+.block-stats {
+  display: flex;
+  gap: var(--space-6);
+}
+
+.block-stat {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  font-size: var(--text-sm);
+  color: var(--text-secondary);
+}
+
+.block-stat .stat-icon {
+  font-size: var(--text-base);
+}
+
+/* =====================
+   Block Complete
+   ===================== */
+.block-complete {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 60vh;
+  text-align: center;
+  padding: var(--space-8);
+}
+
+.complete-icon {
+  font-size: 64px;
+  margin-bottom: var(--space-4);
+}
+
+.complete-title {
+  font-size: var(--text-3xl);
+  font-weight: var(--weight-bold);
+  color: var(--text-primary);
+  margin-bottom: var(--space-6);
+}
+
+.complete-stats {
+  display: flex;
+  gap: var(--space-8);
+  margin-bottom: var(--space-8);
+}
+
+.complete-stat {
+  text-align: center;
+}
+
+.complete-stat .stat-value {
+  font-size: var(--text-4xl);
+  font-weight: var(--weight-bold);
+  color: var(--text-primary);
+}
+
+.complete-stat .stat-value.success {
+  color: var(--success);
+}
+
+.complete-stat .stat-label {
+  font-size: var(--text-sm);
+  color: var(--text-secondary);
+  margin-top: var(--space-2);
+}
+
+.complete-actions {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+  width: 100%;
+  max-width: 300px;
+}
+
+/* =====================
+   Loading States
+   ===================== */
+.loading-state {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: var(--space-8);
+  color: var(--text-muted);
+}
+
+.spinner {
+  width: 40px;
+  height: 40px;
+  border: 3px solid var(--bg-tertiary);
+  border-top-color: var(--accent-primary);
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+.spinner-small {
+  width: 16px;
+  height: 16px;
+  border-width: 2px;
+  display: inline-block;
+  vertical-align: middle;
+  margin-right: var(--space-2);
+}
+
+.loading-text {
+  margin-top: var(--space-4);
+  font-size: var(--text-sm);
+}
+
+/* Error State */
+.error-state {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: var(--space-8);
+  text-align: center;
+}
+
+.error-icon {
+  font-size: var(--text-4xl);
+  margin-bottom: var(--space-4);
+}
+
+.error-message {
+  color: var(--text-secondary);
+  margin-bottom: var(--space-4);
+}
+
+/* =====================
+   Responsive
+   ===================== */
+@media (max-width: 640px) {
+  .question {
+    padding: var(--space-3);
+    gap: var(--space-4);
+  }
+
+  .question-header {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .question-stem {
+    padding: var(--space-4);
+    font-size: var(--text-base);
+  }
+
+  .choice {
+    padding: var(--space-3);
+    gap: var(--space-3);
+  }
+
+  .choice-letter {
+    width: 32px;
+    height: 32px;
+    font-size: var(--text-sm);
+  }
+
+  .submit-bar {
+    flex-direction: column;
+    gap: var(--space-3);
+  }
+
+  .kbd-hints {
+    display: none;
+  }
+
+  .complete-stats {
+    flex-direction: column;
+    gap: var(--space-4);
+  }
+}

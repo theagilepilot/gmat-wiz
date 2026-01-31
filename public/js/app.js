@@ -4,58 +4,14 @@
  */
 
 // ================================
-// API Client
-// ================================
-const api = {
-  baseUrl: '/api',
-  
-  async get(endpoint) {
-    const response = await fetch(`${this.baseUrl}${endpoint}`);
-    if (!response.ok) {
-      const error = await response.json().catch(() => ({ message: 'Request failed' }));
-      throw new Error(error.message || `HTTP ${response.status}`);
-    }
-    return response.json();
-  },
-  
-  async post(endpoint, data) {
-    const response = await fetch(`${this.baseUrl}${endpoint}`, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(data),
-    });
-    if (!response.ok) {
-      const error = await response.json().catch(() => ({ message: 'Request failed' }));
-      throw new Error(error.message || `HTTP ${response.status}`);
-    }
-    return response.json();
-  },
-  
-  async put(endpoint, data) {
-    const response = await fetch(`${this.baseUrl}${endpoint}`, {
-      method: 'PUT',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(data),
-    });
-    if (!response.ok) {
-      const error = await response.json().catch(() => ({ message: 'Request failed' }));
-      throw new Error(error.message || `HTTP ${response.status}`);
-    }
-    return response.json();
-  },
-};
-
-// ================================
 // State Management
 // ================================
 const state = {
   currentView: 'dashboard',
   user: null,
-  currentQuestion: null,
-  selectedAnswer: null,
-  timerInterval: null,
-  timeRemaining: 0,
-  trainingMode: 'build', // 'build' or 'prove'
+  currentBlock: null,
+  dashboard: null,
+  trainingBlock: null,
 };
 
 // ================================
@@ -68,8 +24,11 @@ function showToast(message, type = 'info', duration = 3000) {
   toast.textContent = message;
   container.appendChild(toast);
   
+  // Animate in
+  setTimeout(() => toast.classList.add('show'), 10);
+  
   setTimeout(() => {
-    toast.style.animation = 'slideIn 0.3s ease reverse';
+    toast.classList.remove('show');
     setTimeout(() => toast.remove(), 300);
   }, duration);
 }
@@ -77,200 +36,187 @@ function showToast(message, type = 'info', duration = 3000) {
 // ================================
 // View Management
 // ================================
-function showView(viewName) {
+function showView(viewName, data = null) {
   // Hide all views
   document.querySelectorAll('.view').forEach(view => {
     view.style.display = 'none';
   });
   
-  // Show loading screen while transitioning
+  // Hide loading screen
   const loadingScreen = document.getElementById('loading-screen');
+  loadingScreen.style.display = 'none';
   
   // Show requested view
-  const targetView = document.getElementById(`${viewName}-view`);
+  const targetView = document.getElementById(`${viewName}`);
   if (targetView) {
-    loadingScreen.style.display = 'none';
     targetView.style.display = 'block';
     state.currentView = viewName;
     
-    // Update nav buttons
-    document.querySelectorAll('.nav-btn').forEach(btn => {
-      btn.classList.toggle('active', btn.dataset.view === viewName);
-    });
-  }
-}
-
-// ================================
-// Timer
-// ================================
-function startTimer(seconds, onComplete) {
-  state.timeRemaining = seconds;
-  updateTimerDisplay();
-  
-  if (state.timerInterval) {
-    clearInterval(state.timerInterval);
-  }
-  
-  state.timerInterval = setInterval(() => {
-    state.timeRemaining--;
-    updateTimerDisplay();
-    
-    if (state.timeRemaining <= 0) {
-      clearInterval(state.timerInterval);
-      if (onComplete) onComplete();
+    // Set keyboard context
+    const context = viewName.replace('-view', '');
+    if (window.keyboard) {
+      window.keyboard.setContext(context);
     }
-  }, 1000);
-}
-
-function stopTimer() {
-  if (state.timerInterval) {
-    clearInterval(state.timerInterval);
-    state.timerInterval = null;
+    
+    // Update nav buttons
+    const navView = viewName.replace('-view', '');
+    document.querySelectorAll('.nav-btn').forEach(btn => {
+      btn.classList.toggle('active', btn.dataset.view === navView);
+    });
+    
+    // Handle view-specific initialization
+    handleViewInit(viewName, data);
   }
 }
 
-function updateTimerDisplay() {
-  const display = document.getElementById('timer-display');
-  const value = document.getElementById('timer-value');
-  
-  const minutes = Math.floor(state.timeRemaining / 60);
-  const seconds = state.timeRemaining % 60;
-  value.textContent = `${minutes}:${seconds.toString().padStart(2, '0')}`;
-  
-  // Update warning states
-  display.classList.remove('warning', 'danger');
-  if (state.timeRemaining <= 30) {
-    display.classList.add('danger');
-  } else if (state.timeRemaining <= 60) {
-    display.classList.add('warning');
+function handleViewInit(viewName, data) {
+  switch (viewName) {
+    case 'dashboard-view':
+      initDashboard();
+      break;
+    case 'question-view':
+      if (data && data.block) {
+        initTrainingBlock(data.block);
+      }
+      break;
   }
 }
 
 // ================================
 // Dashboard
 // ================================
+async function initDashboard() {
+  const container = document.getElementById('dashboard-view');
+  
+  // Cleanup previous instance
+  if (state.dashboard) {
+    state.dashboard.destroy?.();
+  }
+  
+  // Create new dashboard
+  state.dashboard = new Dashboard(container);
+  await state.dashboard.init();
+}
+
 async function loadDashboard() {
   try {
     // Load health check to verify connection
-    const health = await api.get('/health');
+    const health = await window.api.get('/health');
     
     if (health.status === 'error') {
       showToast('Database connection error', 'error');
       return;
     }
     
-    if (health.checks.openai === 'not_configured') {
+    if (health.checks?.openai === 'not_configured') {
       showToast('OpenAI API key not configured', 'warning', 5000);
     }
     
-    // For now, show placeholder data
-    // These will be replaced with real API calls in later phases
+    // Update header level info
     document.getElementById('current-level').textContent = '1';
     document.getElementById('level-name').textContent = 'Orientation';
     
-    document.getElementById('stat-streak').textContent = '0';
-    document.getElementById('stat-xp').textContent = '0';
-    document.getElementById('stat-accuracy').textContent = '--%';
-    document.getElementById('stat-questions').textContent = '0';
-    
-    const gauge = document.getElementById('readiness-gauge');
-    gauge.querySelector('.gauge-value').textContent = '0';
-    gauge.querySelector('.gauge-label').textContent = 'Begin your journey';
-    
-    // Placeholder training blocks
-    const blocksContainer = document.getElementById('training-blocks');
-    blocksContainer.innerHTML = `
-      <div class="training-block" onclick="startTrainingBlock('orientation')">
-        <span class="block-icon">📚</span>
-        <div class="block-info">
-          <div class="block-goal">GMAT Orientation</div>
-          <div class="block-meta">Learn the test structure • ~15 min</div>
-        </div>
-      </div>
-      <div class="training-block" onclick="showToast('Complete orientation first', 'warning')">
-        <span class="block-icon">🔒</span>
-        <div class="block-info">
-          <div class="block-goal">Foundation: Arithmetic</div>
-          <div class="block-meta">Locked • Complete Level 1</div>
-        </div>
-      </div>
-    `;
-    
-    showView('dashboard');
+    showView('dashboard-view');
     
   } catch (error) {
     console.error('Failed to load dashboard:', error);
     showToast('Failed to connect to server', 'error');
+    
+    // Still show dashboard view
+    showView('dashboard-view');
   }
 }
 
 // ================================
-// Question Flow (Placeholder)
+// Training Block
 // ================================
-function startTrainingBlock(blockType) {
-  showToast(`Training block "${blockType}" coming in Phase 4+`, 'info');
-}
-
-function selectAnswer(choice) {
-  state.selectedAnswer = choice;
+async function initTrainingBlock(block) {
+  const container = document.getElementById('question-view');
   
-  // Update UI
-  document.querySelectorAll('.choice').forEach(el => {
-    el.classList.remove('selected');
-  });
-  
-  const selectedEl = document.querySelector(`[data-choice="${choice}"]`);
-  if (selectedEl) {
-    selectedEl.classList.add('selected');
+  // Cleanup previous instance
+  if (state.trainingBlock) {
+    state.trainingBlock.destroy?.();
   }
   
-  // Enable submit button
-  document.getElementById('submit-btn').disabled = false;
+  // Create new training block
+  state.trainingBlock = new TrainingBlock(container);
+  state.trainingBlock.onComplete = handleBlockComplete;
+  state.trainingBlock.onAbandon = handleBlockAbandon;
+  
+  await state.trainingBlock.init(block);
+}
+
+function handleBlockComplete(block) {
+  showToast('Block complete! Great work!', 'success');
+  // Could show celebration, update stats, etc.
+}
+
+function handleBlockAbandon(block) {
+  showToast('Session ended', 'info');
+  showView('dashboard-view');
+}
+
+async function startTraining(mode) {
+  try {
+    const targetQuestions = {
+      sprint: 10,
+      endurance: 25,
+      review: 15,
+      mixed: 20
+    };
+
+    const block = await window.api.startBlock({
+      mode,
+      targetQuestions: targetQuestions[mode] || 10
+    });
+
+    showView('question-view', { block });
+  } catch (error) {
+    console.error('Failed to start training:', error);
+    showToast('Failed to start training', 'error');
+  }
 }
 
 // ================================
-// Keyboard Shortcuts
+// Global Keyboard Shortcuts
 // ================================
 function setupKeyboardShortcuts() {
-  document.addEventListener('keydown', (e) => {
-    // Ignore if typing in an input
-    if (e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA') {
-      return;
-    }
-    
-    // Global shortcuts
-    switch (e.key.toLowerCase()) {
-      case 'd':
-        showView('dashboard');
-        break;
-      case 'escape':
-        if (state.currentView !== 'dashboard') {
-          showView('dashboard');
-        }
-        break;
-    }
-    
-    // Question view shortcuts
-    if (state.currentView === 'question') {
-      switch (e.key.toLowerCase()) {
-        case 'a':
-        case 'b':
-        case 'c':
-        case 'd':
-        case 'e':
-          selectAnswer(e.key.toUpperCase());
-          break;
-        case 'enter':
-          if (state.selectedAnswer) {
-            document.getElementById('submit-btn').click();
-          }
-          break;
-        case 'h':
-          document.getElementById('hint-btn').click();
-          break;
-      }
-    }
+  if (!window.keyboard) return;
+  
+  // Dashboard shortcut
+  window.keyboard.register('d', () => {
+    showView('dashboard-view');
+  }, {
+    context: 'default',
+    description: 'Go to dashboard'
   });
+  
+  // Escape to go back
+  window.keyboard.register('escape', () => {
+    if (state.currentView !== 'dashboard-view') {
+      showView('dashboard-view');
+    }
+  }, {
+    context: 'default',
+    description: 'Go back'
+  });
+  
+  // Question mark for help
+  window.keyboard.register('?', () => {
+    showKeyboardHelp();
+  }, {
+    context: 'default',
+    description: 'Show keyboard shortcuts'
+  });
+}
+
+function showKeyboardHelp() {
+  const shortcuts = window.keyboard?.getShortcuts() || [];
+  const message = shortcuts.map(s => `${s.key.toUpperCase()}: ${s.description}`).join('\n');
+  
+  // For now, show in console and toast
+  console.log('Keyboard shortcuts:', shortcuts);
+  showToast('Press ? to see shortcuts (check console)', 'info');
 }
 
 // ================================
@@ -281,34 +227,34 @@ function setupNavigation() {
   document.querySelectorAll('.nav-btn').forEach(btn => {
     btn.addEventListener('click', () => {
       const view = btn.dataset.view;
-      if (view === 'dashboard') {
-        loadDashboard();
-      } else {
-        showToast(`${view} view coming in Phase 8`, 'info');
-      }
+      showView(`${view}-view`);
     });
   });
   
-  // Dashboard action buttons
-  document.getElementById('start-training-btn')?.addEventListener('click', () => {
-    startTrainingBlock('daily');
-  });
-  
-  document.getElementById('view-analytics-btn')?.addEventListener('click', () => {
-    showToast('Analytics view coming in Phase 8', 'info');
-  });
-  
-  document.getElementById('view-levels-btn')?.addEventListener('click', () => {
-    showToast('Levels view coming in Phase 8', 'info');
-  });
-  
-  document.getElementById('view-errors-btn')?.addEventListener('click', () => {
-    showToast('Error log coming in Phase 8', 'info');
-  });
-  
+  // Settings button
   document.getElementById('settings-btn')?.addEventListener('click', () => {
-    showToast('Settings coming in Phase 8', 'info');
+    showToast('Settings coming soon', 'info');
   });
+}
+
+// ================================
+// Timer Display (Header)
+// ================================
+function updateHeaderTimer(seconds) {
+  const value = document.getElementById('timer-value');
+  const display = document.getElementById('timer-display');
+  
+  const minutes = Math.floor(seconds / 60);
+  const secs = seconds % 60;
+  value.textContent = `${minutes}:${secs.toString().padStart(2, '0')}`;
+  
+  // Update warning states
+  display.classList.remove('warning', 'danger');
+  if (seconds <= 30) {
+    display.classList.add('danger');
+  } else if (seconds <= 60) {
+    display.classList.add('warning');
+  }
 }
 
 // ================================
@@ -317,6 +263,7 @@ function setupNavigation() {
 async function init() {
   console.log('🚀 GMAT Ascension initializing...');
   
+  // Setup global shortcuts
   setupKeyboardShortcuts();
   setupNavigation();
   
@@ -324,6 +271,7 @@ async function init() {
   await loadDashboard();
   
   console.log('✅ GMAT Ascension ready');
+  console.log('💡 Press ? for keyboard shortcuts');
 }
 
 // Start app when DOM is ready
@@ -333,5 +281,11 @@ if (document.readyState === 'loading') {
   init();
 }
 
-// Export for debugging
-window.gmatApp = { state, api, showToast, showView };
+// Export for debugging and cross-component access
+window.gmatApp = { 
+  state, 
+  showToast, 
+  showView,
+  startTraining,
+  updateHeaderTimer
+};
