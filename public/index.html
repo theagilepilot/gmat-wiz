@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>GMAT Ascension</title>
+  <link rel="stylesheet" href="/css/main.css">
+</head>
+<body>
+  <div id="app">
+    <!-- Header -->
+    <header class="app-header">
+      <div class="header-left">
+        <h1 class="logo">GMAT <span class="accent">Ascension</span></h1>
+      </div>
+      <div class="header-center">
+        <div class="level-indicator" id="level-indicator">
+          <span class="level-label">Level</span>
+          <span class="level-number" id="current-level">1</span>
+          <span class="level-name" id="level-name">Orientation</span>
+        </div>
+      </div>
+      <div class="header-right">
+        <div class="timer-display" id="timer-display">
+          <span class="timer-icon">⏱</span>
+          <span class="timer-value" id="timer-value">--:--</span>
+        </div>
+        <button class="icon-btn" id="settings-btn" title="Settings">⚙</button>
+      </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="app-main" id="main-content">
+      <!-- Loading state -->
+      <div class="loading-screen" id="loading-screen">
+        <div class="loader"></div>
+        <p>Initializing GMAT Ascension...</p>
+      </div>
+
+      <!-- Dashboard (default view) -->
+      <div class="view" id="dashboard-view" style="display: none;">
+        <div class="dashboard">
+          <section class="dashboard-section readiness">
+            <h2>Readiness Score</h2>
+            <div class="readiness-gauge" id="readiness-gauge">
+              <div class="gauge-value">--</div>
+              <div class="gauge-label">Loading...</div>
+            </div>
+          </section>
+
+          <section class="dashboard-section daily-plan">
+            <h2>Today's Training</h2>
+            <div class="training-blocks" id="training-blocks">
+              <p class="empty-state">Loading your training plan...</p>
+            </div>
+          </section>
+
+          <section class="dashboard-section quick-stats">
+            <h2>Quick Stats</h2>
+            <div class="stats-grid" id="stats-grid">
+              <div class="stat-card">
+                <div class="stat-value" id="stat-streak">--</div>
+                <div class="stat-label">Day Streak</div>
+              </div>
+              <div class="stat-card">
+                <div class="stat-value" id="stat-xp">--</div>
+                <div class="stat-label">Total XP</div>
+              </div>
+              <div class="stat-card">
+                <div class="stat-value" id="stat-accuracy">--</div>
+                <div class="stat-label">Accuracy</div>
+              </div>
+              <div class="stat-card">
+                <div class="stat-value" id="stat-questions">--</div>
+                <div class="stat-label">Questions</div>
+              </div>
+            </div>
+          </section>
+
+          <section class="dashboard-section actions">
+            <button class="btn btn-primary btn-large" id="start-training-btn">
+              Start Training
+            </button>
+            <div class="secondary-actions">
+              <button class="btn btn-secondary" id="view-analytics-btn">Analytics</button>
+              <button class="btn btn-secondary" id="view-levels-btn">Levels</button>
+              <button class="btn btn-secondary" id="view-errors-btn">Error Log</button>
+            </div>
+          </section>
+        </div>
+      </div>
+
+      <!-- Question View (shown during training) -->
+      <div class="view" id="question-view" style="display: none;">
+        <div class="question-container">
+          <div class="question-header">
+            <span class="question-type" id="question-type">Loading...</span>
+            <span class="question-difficulty" id="question-difficulty">--</span>
+          </div>
+          
+          <div class="question-stem" id="question-stem">
+            <!-- Question text will be inserted here -->
+          </div>
+
+          <div class="choices" id="choices">
+            <!-- Answer choices will be inserted here -->
+          </div>
+
+          <div class="question-actions">
+            <button class="btn btn-hint" id="hint-btn" title="Request Hint (H)">
+              💡 Hint
+            </button>
+            <button class="btn btn-primary" id="submit-btn" disabled>
+              Submit (Enter)
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Outcome View (after answering) -->
+      <div class="view" id="outcome-view" style="display: none;">
+        <!-- Outcome classification UI will be inserted here -->
+      </div>
+
+      <!-- Reflection View -->
+      <div class="view" id="reflection-view" style="display: none;">
+        <!-- Reflection prompts and explanation will be inserted here -->
+      </div>
+    </main>
+
+    <!-- Navigation Footer -->
+    <nav class="app-nav">
+      <button class="nav-btn active" data-view="dashboard" title="Dashboard (D)">
+        <span class="nav-icon">🏠</span>
+        <span class="nav-label">Home</span>
+      </button>
+      <button class="nav-btn" data-view="analytics" title="Analytics (A)">
+        <span class="nav-icon">📊</span>
+        <span class="nav-label">Analytics</span>
+      </button>
+      <button class="nav-btn" data-view="levels" title="Levels (L)">
+        <span class="nav-icon">🎯</span>
+        <span class="nav-label">Levels</span>
+      </button>
+      <button class="nav-btn" data-view="errors" title="Error Log (E)">
+        <span class="nav-icon">📝</span>
+        <span class="nav-label">Errors</span>
+      </button>
+    </nav>
+  </div>
+
+  <!-- Toast Notifications -->
+  <div class="toast-container" id="toast-container"></div>
+
+  <script src="/js/app.js" type="module"></script>
+</body>
+</html>

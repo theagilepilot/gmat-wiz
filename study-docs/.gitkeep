@@ -1,0 +1,36 @@
+# Study Documents
+
+Place your GMAT study materials in this folder to enable RAG-augmented learning.
+
+## Supported Formats
+
+- `.txt` - Plain text files
+- `.md` - Markdown files
+- `.pdf` - PDF documents
+- `.docx` - Word documents
+
+## Organization Tips
+
+You can organize files into subfolders:
+
+```
+study-docs/
+├── quant/
+│   ├── algebra-notes.md
+│   └── geometry-formulas.pdf
+├── verbal/
+│   ├── grammar-rules.txt
+│   └── rc-strategies.docx
+└── general/
+    └── timing-strategies.md
+```
+
+## How It Works
+
+When you add study materials here:
+
+1. The app will index the content
+2. AI-generated explanations will reference your notes
+3. Questions can be tailored to concepts in your materials
+
+If this folder is empty, the app will use standard AI generation without RAG augmentation.

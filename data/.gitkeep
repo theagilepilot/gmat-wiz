@@ -1,0 +1,17 @@
+# Data Directory
+
+This folder contains the SQLite database file(s).
+
+- `gmat-ascension.db` - Main application database
+- `gmat-ascension.db-wal` - Write-ahead log (auto-generated)
+- `gmat-ascension.db-shm` - Shared memory file (auto-generated)
+
+These files are gitignored and should not be committed to version control.
+
+## Backup
+
+To backup your progress, copy the `gmat-ascension.db` file to a safe location.
+
+## Reset
+
+To reset all data, delete the `gmat-ascension.db` file and restart the application.
