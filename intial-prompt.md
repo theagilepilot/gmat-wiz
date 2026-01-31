@@ -13,7 +13,13 @@ The app should have some feedback loop / tracking system to identify what areas 
 
 The app should also have a proper progression / skill tree. I should master the basics before moving to the easy questions, then easy questions before medium, then medium before hard.
 
-The app should integrate with AI to generate GMAT questions, but also have a verification system to ensure they meet the proper criteria for an official-like GMAT question based on difficulty. 
+The app should integrate with AI to generate GMAT questions, but also have a verification system to ensure they meet the proper criteria for an official-like GMAT question based on difficulty. The AI integration should use CpenAI API for now.
+
+The gamification can also use some sort of ELO system that determines the difficulty of exposure. It should be optimized so if the user is clearly getting better, they start getting harder questions - like the real GMAT focus.
+
+The app should be designed to be ran locally - NodeJS preferred. All user needs to do is input proper API keys in an .env file to get it working. Thus, appropriate data to save the users progress should be stored locally. 
+
+Additionally, lets use a RAG system where the user can store any GMAT study documentation in a folder and have the AI model pull from it when generating questions. If nothing is supplied here though, just use normal AI generation..
 
 Here is the level system and how it could work. Validate it for any gaps and add improvements if needed, again we need an 800 level test taker for someone who uses the app consistently for 4 months:
 
