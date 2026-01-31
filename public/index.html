@@ -12,6 +12,10 @@
   <!-- CSS - Views -->
   <link rel="stylesheet" href="/css/dashboard.css">
   <link rel="stylesheet" href="/css/question.css">
+  <link rel="stylesheet" href="/css/analytics.css">
+  <link rel="stylesheet" href="/css/levels.css">
+  <link rel="stylesheet" href="/css/errors.css">
+  <link rel="stylesheet" href="/css/settings.css">
 </head>
 <body>
   <div id="app">
@@ -56,32 +60,22 @@
 
       <!-- Analytics View -->
       <div class="view" id="analytics-view" style="display: none;">
-        <div class="container">
-          <h2 class="text-2xl font-bold mb-4">Analytics</h2>
-          <div class="card">
-            <p class="text-muted">Coming soon - detailed performance analytics</p>
-          </div>
-        </div>
+        <!-- Analytics component will render here -->
       </div>
 
       <!-- Levels View -->
       <div class="view" id="levels-view" style="display: none;">
-        <div class="container">
-          <h2 class="text-2xl font-bold mb-4">Mastery Levels</h2>
-          <div class="card">
-            <p class="text-muted">Coming soon - skill mastery progression</p>
-          </div>
-        </div>
+        <!-- LevelProgress component will render here -->
       </div>
 
       <!-- Error Log View -->
       <div class="view" id="errors-view" style="display: none;">
-        <div class="container">
-          <h2 class="text-2xl font-bold mb-4">Error Log</h2>
-          <div class="card">
-            <p class="text-muted">Coming soon - review your mistakes</p>
-          </div>
-        </div>
+        <!-- ErrorLog component will render here -->
+      </div>
+
+      <!-- Settings View -->
+      <div class="view" id="settings-view" style="display: none;">
+        <!-- Settings component will render here -->
       </div>
     </main>
 
@@ -102,6 +96,10 @@
       <button class="nav-btn" data-view="errors" title="Error Log (E)">
         <span class="nav-icon">📝</span>
         <span class="nav-label">Errors</span>
+      </button>
+      <button class="nav-btn" data-view="settings" title="Settings (S)">
+        <span class="nav-icon">⚙️</span>
+        <span class="nav-label">Settings</span>
       </button>
     </nav>
   </div>

@@ -3,6 +3,11 @@
  * Minimal, keyboard-first UI
  */
 
+import { Analytics } from './components/Analytics.js';
+import { LevelProgress } from './components/LevelProgress.js';
+import { ErrorLog } from './components/ErrorLog.js';
+import { Settings } from './components/Settings.js';
+
 // ================================
 // State Management
 // ================================
@@ -12,6 +17,10 @@ const state = {
   currentBlock: null,
   dashboard: null,
   trainingBlock: null,
+  analytics: null,
+  levelProgress: null,
+  errorLog: null,
+  settings: null
 };
 
 // ================================
@@ -78,6 +87,18 @@ function handleViewInit(viewName, data) {
       if (data && data.block) {
         initTrainingBlock(data.block);
       }
+      break;
+    case 'analytics-view':
+      initAnalytics();
+      break;
+    case 'levels-view':
+      initLevelProgress();
+      break;
+    case 'errors-view':
+      initErrorLog();
+      break;
+    case 'settings-view':
+      initSettings();
       break;
   }
 }
@@ -178,6 +199,77 @@ async function startTraining(mode) {
 }
 
 // ================================
+// Analytics View
+// ================================
+async function initAnalytics() {
+  const container = document.getElementById('analytics-view');
+  
+  // Cleanup previous instance
+  if (state.analytics) {
+    state.analytics.destroy?.();
+  }
+  
+  // Create new analytics
+  state.analytics = new Analytics(container, window.api);
+  await state.analytics.init();
+}
+
+// ================================
+// Level Progress View
+// ================================
+async function initLevelProgress() {
+  const container = document.getElementById('levels-view');
+  
+  // Cleanup previous instance
+  if (state.levelProgress) {
+    state.levelProgress.destroy?.();
+  }
+  
+  // Create new level progress
+  state.levelProgress = new LevelProgress(container, window.api);
+  await state.levelProgress.init();
+}
+
+// ================================
+// Error Log View
+// ================================
+async function initErrorLog() {
+  const container = document.getElementById('errors-view');
+  
+  // Cleanup previous instance
+  if (state.errorLog) {
+    state.errorLog.destroy?.();
+  }
+  
+  // Create new error log
+  state.errorLog = new ErrorLog(container, window.api);
+  await state.errorLog.init();
+  
+  // Listen for retry question events
+  container.addEventListener('retry-question', (e) => {
+    const { questionId } = e.detail;
+    // TODO: Start a single question training with this question
+    showToast(`Retry question #${questionId} - Coming soon`, 'info');
+  });
+}
+
+// ================================
+// Settings View
+// ================================
+async function initSettings() {
+  const container = document.getElementById('settings-view');
+  
+  // Cleanup previous instance
+  if (state.settings) {
+    state.settings.destroy?.();
+  }
+  
+  // Create new settings
+  state.settings = new Settings(container, window.api);
+  await state.settings.init();
+}
+
+// ================================
 // Global Keyboard Shortcuts
 // ================================
 function setupKeyboardShortcuts() {
@@ -189,6 +281,38 @@ function setupKeyboardShortcuts() {
   }, {
     context: 'default',
     description: 'Go to dashboard'
+  });
+  
+  // Analytics shortcut
+  window.keyboard.register('a', () => {
+    showView('analytics-view');
+  }, {
+    context: 'default',
+    description: 'Go to analytics'
+  });
+  
+  // Levels shortcut
+  window.keyboard.register('l', () => {
+    showView('levels-view');
+  }, {
+    context: 'default',
+    description: 'Go to levels'
+  });
+  
+  // Error log shortcut
+  window.keyboard.register('e', () => {
+    showView('errors-view');
+  }, {
+    context: 'default',
+    description: 'Go to error log'
+  });
+  
+  // Settings shortcut
+  window.keyboard.register('s', () => {
+    showView('settings-view');
+  }, {
+    context: 'default',
+    description: 'Go to settings'
   });
   
   // Escape to go back
@@ -233,7 +357,7 @@ function setupNavigation() {
   
   // Settings button
   document.getElementById('settings-btn')?.addEventListener('click', () => {
-    showToast('Settings coming soon', 'info');
+    showView('settings-view');
   });
 }
 
